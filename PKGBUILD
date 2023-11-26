@@ -1,9 +1,9 @@
 # Maintainer: Evangelos Foutras <evangelos@foutrelis.com>
 # Contributor: Jan "heftig" Steffens <jan.steffens@gmail.com>
 
-pkgname=('llvm' 'llvm-libs')
+pkgname=('llvm' 'llvm-libs' 'llvm-lit')
 pkgver=16.0.6
-pkgrel=1
+pkgrel=2
 arch=('x86_64')
 url="https://llvm.org/"
 license=('custom:Apache 2.0 with LLVM Exception')
@@ -94,6 +94,10 @@ build() {
 
   cmake .. "${cmake_args[@]}"
   ninja
+
+  # Include lit for running lit-based tests in other projects
+  cd utils/lit
+  python -m build --wheel --no-isolation
 }
 
 check() {
@@ -108,11 +112,6 @@ package_llvm() {
   cd llvm-$pkgver.src/build
 
   DESTDIR="$pkgdir" ninja install-distribution
-
-  # Include lit for running lit-based tests in other projects
-  pushd ../utils/lit
-  python3 setup.py install --root="$pkgdir" -O1
-  popd
 
   # The runtime libraries go into llvm-libs
   mv -f "$pkgdir"/usr/lib/lib{LLVM,LTO,Remarks}*.so* "$srcdir"
@@ -141,6 +140,13 @@ package_llvm-libs() {
 
   install -Dm644 "$srcdir/llvm-$pkgver.src/LICENSE.TXT" \
     "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
+
+package_llvm-lit() {
+  pkgdesc="An LLVM testing tool"
+  depends=('python')
+  cd $srcdir/llvm-$pkgver.src/utils/lit
+  python -m installer --destdir="$pkgdir" dist/*.whl
 }
 
 # vim:set ts=2 sw=2 et:
