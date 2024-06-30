@@ -1,6 +1,6 @@
 pkgbase = llvm
 	pkgver = 18.1.8
-	pkgrel = 2
+	pkgrel = 3
 	url = https://llvm.org/
 	arch = x86_64
 	license = custom:Apache 2.0 with LLVM Exception
@@ -46,4 +46,3 @@ pkgname = llvm-libs
 	depends = libedit
 	depends = ncurses
 	depends = libxml2
-	depends = llvm17-libs
