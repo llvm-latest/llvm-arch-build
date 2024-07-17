@@ -118,7 +118,7 @@ check() {
 
 package_llvm() {
   pkgdesc="Compiler infrastructure"
-  depends=('llvm-libs' 'perl')
+  depends=('llvm-libs' 'curl' 'perl')
 
   cd llvm-$pkgver.src/build
 
@@ -141,7 +141,7 @@ package_llvm() {
 
 package_llvm-libs() {
   pkgdesc="LLVM runtime libraries"
-  depends=('gcc-libs' 'zlib' 'zstd' 'curl' 'libffi' 'libedit' 'ncurses' 'libxml2')
+  depends=('gcc-libs' 'zlib' 'zstd' 'libffi' 'libedit' 'ncurses' 'libxml2')
 
   install -d "$pkgdir/usr/lib"
   cp -P \
