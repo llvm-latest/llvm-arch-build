@@ -3,7 +3,7 @@
 
 pkgname=('llvm' 'llvm-libs')
 pkgver=19.1.6
-pkgrel=1
+pkgrel=2
 arch=('x86_64')
 url="https://llvm.org/"
 license=('Apache-2.0 WITH LLVM-exception')
@@ -15,7 +15,7 @@ _source_base=https://github.com/llvm/llvm-project/releases/download/llvmorg-$pkg
 source=($_source_base/llvm-$pkgver.src.tar.xz{,.sig}
         $_source_base/cmake-$pkgver.src.tar.xz{,.sig}
         $_source_base/third-party-$pkgver.src.tar.xz{,.sig}
-        $pkgname-SelectionDAG.patch)
+        llvm-SelectionDAG.patch)
 sha256sums=('ad1a3b125ff014ded290094088de40efb9193ce81a24278184230b7d401f8a3e'
             'SKIP'
             '9c7ec82d9a240dc2287b8de89d6881bb64ceea0dcd6ce133c34ef65bda22d99e'
@@ -140,6 +140,7 @@ package_llvm() {
 package_llvm-libs() {
   pkgdesc="LLVM runtime libraries"
   depends=('gcc-libs' 'zlib' 'zstd' 'libffi' 'libedit' 'libxml2')
+  depends+=('llvm18-libs') # help bootstrapping crystal/ldc/rust (remove me!)
 
   install -d "$pkgdir/usr/lib"
   cp -P \
