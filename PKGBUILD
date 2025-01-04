@@ -7,8 +7,8 @@ pkgrel=1
 arch=('x86_64')
 url="https://llvm.org/"
 license=('Apache-2.0 WITH LLVM-exception')
-makedepends=('cmake' 'ninja' 'zlib' 'zstd' 'curl' 'libffi' 'libedit' 'ncurses'
-             'libxml2' 'python-setuptools' 'python-psutil' 'python-sphinx'
+makedepends=('cmake' 'ninja' 'zlib' 'zstd' 'curl' 'libffi' 'libedit' 'libxml2'
+             'python-setuptools' 'python-psutil' 'python-sphinx'
              'python-myst-parser')
 options=('staticlibs' '!lto') # tools/llvm-shlib/typeids.test fails with LTO
 _source_base=https://github.com/llvm/llvm-project/releases/download/llvmorg-$pkgver
@@ -139,7 +139,7 @@ package_llvm() {
 
 package_llvm-libs() {
   pkgdesc="LLVM runtime libraries"
-  depends=('gcc-libs' 'zlib' 'zstd' 'libffi' 'libedit' 'ncurses' 'libxml2')
+  depends=('gcc-libs' 'zlib' 'zstd' 'libffi' 'libedit' 'libxml2')
 
   install -d "$pkgdir/usr/lib"
   cp -P \
