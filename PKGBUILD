@@ -138,6 +138,7 @@ package_llvm() {
 package_llvm-libs() {
   pkgdesc="LLVM runtime libraries"
   depends=('gcc-libs' 'zlib' 'zstd' 'libffi' 'libedit' 'libxml2')
+  provides=('libLLVM.so' 'libLTO.so' 'libRemarks.so')
 
   install -d "$pkgdir/usr/lib"
   cp -P \
