@@ -96,6 +96,7 @@ build() {
     -DLLVM_LINK_LLVM_DYLIB=ON
     -DLLVM_USE_PERF=ON
     -DSPHINX_WARNINGS_AS_ERRORS=OFF
+    -DPACKAGE_BUGREPORT=https://gitlab.archlinux.org/archlinux/packaging/packages/llvm/-/issues
   )
 
   cmake .. "${cmake_args[@]}"
