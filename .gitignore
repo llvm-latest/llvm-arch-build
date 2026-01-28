@@ -1,0 +1,8 @@
+#==============================================================================#
+# Directories to ignore (do not add trailing '/'s, they skip symlinks).
+#==============================================================================#
+# VS and VSCode config files.
+.vscode
+.vs
+#zed config files
+.zed
